@@ -1,13 +1,13 @@
 import { AxiosInstance, AxiosResponse } from 'axios'
 import { Cookies } from 'quasar'
-import { useLoginedUserStore } from '@store/logined'
-import { LoginedResponse } from '@store/logined/types'
-import { useSettingStore } from '@store/setting'
+import { useLoginedUserStore } from '../store/logined'
+import { LoginedResponse } from '../store/logined/types'
+import { useSettingStore } from '../store/setting'
 import {
   NavigationGuardNext,
   RouteLocationNormalized
 } from 'vue-router'
-import { API as UserAPI } from '@store/users/const'
+import { API as UserAPI } from '../store/users/const'
 
 interface RouteMetaImpl {
   ShowHeaderAnnouncement: boolean
