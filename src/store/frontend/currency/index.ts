@@ -25,7 +25,8 @@ export const useCurrencyStore = defineStore('currency', {
     },
     getCachedCoinCurrencyByCoinName (): (coinName: string, currency: Currency) => number {
       return (coinName: string, currency: Currency) => {
-        if ((coinName.toLowerCase().includes('usdt') ||
+        if ((coinName.toLowerCase().includes('usd') ||
+            coinName.toLowerCase().includes('usdt') ||
             coinName.toLowerCase().includes('tether') ||
             coinName.toLowerCase().includes('binance usd') ||
             coinName.toLowerCase().includes('usdbep20') ||
@@ -50,7 +51,7 @@ export const useCurrencyStore = defineStore('currency', {
   },
   actions: {
     getCurrency (req: GetCoinCurrencyRequest, coinName: string, done: (amount: number) => void) {
-      if ((coinName.toLowerCase().includes('usdt') || coinName.toLowerCase().includes('tether')) && req.Currency === Currency.USD) {
+      if ((coinName.toLowerCase().includes('usd') || (coinName.toLowerCase().includes('usdt') || coinName.toLowerCase().includes('tether')) && req.Currency === Currency.USD) {
         done(1)
         return
       }
