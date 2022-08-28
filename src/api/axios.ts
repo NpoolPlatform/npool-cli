@@ -14,16 +14,24 @@ const createAPI = (baseURL?: string, appID?: string, simple?: boolean): AxiosIns
     return undefined
   }
 
+  const headers = new Map<string, any>()
+  headers.set('Content-Type', 'application/json')
+  headers.set('X-App-ID', Cookies.get('X-App-ID'))
+
+  if (Cookies.get('X-User-ID')) {
+    headers.set('X-User-ID', Cookies.get('X-User-ID'))
+  }
+  if (Cookies.get('X-Lang-ID')) {
+    headers.set('X-Lang-ID', Cookies.get('X-Lang-ID'))
+  }
+  if (Cookies.get('X-App-Login-Token')) {
+    headers.set('X-App-Login-Token', Cookies.get('X-App-Login-Token'))
+  }
+
   const api = axios.create({
     method: 'POST',
     baseURL: process.env.DEV ? '/api' : Cookies.get('X-Base-URL'),
-    headers: {
-      'Content-Type': 'application/json',
-      'X-App-ID': Cookies.get('X-App-ID'),
-      'X-User-ID': Cookies.get('X-User-ID'),
-      'X-Lang-ID': Cookies.get('X-Lang-ID'),
-      'X-App-Login-Token': Cookies.get('X-App-Login-Token')
-    },
+    headers: headers as unknown as Record<string, string | number | boolean>,
     withCredentials: false,
     responseType: 'json',
     timeout: 60000
