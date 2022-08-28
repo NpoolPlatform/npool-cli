@@ -32,7 +32,7 @@ const createAPI = (baseURL?: string, appID?: string, simple?: boolean): AxiosIns
   const api = axios.create({
     method: 'POST',
     baseURL: process.env.DEV ? '/api' : Cookies.get('X-Base-URL'),
-    headers: headers as unknown as Record<string, string | number | boolean>,
+    headers: headers,
     withCredentials: false,
     responseType: 'json',
     timeout: 60000
