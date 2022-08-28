@@ -14,18 +14,19 @@ const createAPI = (baseURL?: string, appID?: string, simple?: boolean): AxiosIns
     return undefined
   }
 
-  const headers = new Map<string, any>()
-  headers.set('Content-Type', 'application/json')
-  headers.set('X-App-ID', Cookies.get('X-App-ID'))
+  const headers: Record<string, string | number | boolean> = {
+    'Content-Type': 'application/json',
+    'X-App-ID': Cookies.get('X-App-ID')
+  }
 
   if (Cookies.get('X-User-ID')) {
-    headers.set('X-User-ID', Cookies.get('X-User-ID'))
+    headers['X-User-ID'] = Cookies.get('X-User-ID')
   }
   if (Cookies.get('X-Lang-ID')) {
-    headers.set('X-Lang-ID', Cookies.get('X-Lang-ID'))
+    headers['X-Lang-ID'] = Cookies.get('X-Lang-ID')
   }
   if (Cookies.get('X-App-Login-Token')) {
-    headers.set('X-App-Login-Token', Cookies.get('X-App-Login-Token'))
+    headers['X-App-Login-Token'] = Cookies.get('X-App-Login-Token')
   }
 
   const api = axios.create({
