@@ -84,7 +84,7 @@ export const useCoinStore = defineStore('coin', {
           name = name.replace('USD', ' USD')
         }
         if (name.includes('Binance USD')) {
-          name = name.replace('Binance USD', 'BEP20')
+          name = name.replace('Binance USD', 'BUSD BEP20')
         }
         if (name.includes('USDT')) {
           name = name.replace('USDT', 'Tether')
