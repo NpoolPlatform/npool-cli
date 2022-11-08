@@ -40,13 +40,15 @@ export const useInspireStore = defineStore('inspire', {
           done?.()
         })
     },
-    createInvitationCode (req: CreateSubInvitationCodeRequest, done: () => void) {
-      doAction<CreateSubInvitationCodeRequest, CreateSubInvitationCodeResponse>(
+    createInvitationCode (req: CreateSubInvitationCodeRequest, done: (error: boolean) => void) {
+      doActionWithError<CreateSubInvitationCodeRequest, CreateSubInvitationCodeResponse>(
         API.CREATE_INVITATION_CODE,
         req,
         req.Message,
         (): void => {
-          done()
+          done(false)
+        }, () => {
+          done(true)
         })
     },
     updateInvitationCode (req: UpdateInvitationCodeRequest, done: () => void) {
