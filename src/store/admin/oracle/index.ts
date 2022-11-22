@@ -15,7 +15,14 @@ export const useAdminOracleStore = defineStore('adminoracle', {
   state: (): OracleState => ({
     Currencies: []
   }),
-  getters: {},
+  getters: {
+    getCurrencyByID () {
+      return (coinTypeID: string) => {
+        const currency = this.Currencies.find((el) => el.CoinTypeID === coinTypeID)
+        return currency? Math.min(currency.AppPriceVSUSDT, currency.PriceVSUSDT) : 1
+      }
+    }
+  },
   actions: {
     createCurrency (req: CreateCurrencyRequest, done: () => void) {
       doAction<CreateCurrencyRequest, CreateCurrencyResponse>(
