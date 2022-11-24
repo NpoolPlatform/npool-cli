@@ -18,8 +18,7 @@ export const useAdminOracleStore = defineStore('adminoracle', {
   getters: {
     getCurrencyByID () {
       return (coinTypeID: string) => {
-        const currency = this.Currencies.find((el) => el.CoinTypeID === coinTypeID)
-        return currency? Math.min(currency.AppPriceVSUSDT, currency.PriceVSUSDT) : 1
+        return this.Currencies.find((el) => el.CoinTypeID === coinTypeID)
       }
     }
   },
