@@ -13,7 +13,17 @@ export const useRegInvitationStore = defineStore('reginvitation', {
   state: (): RegInvitationState => ({
     RegInvitations: []
   }),
-  getters: {},
+  getters: {
+    getInviteesByID () {
+      return (userID: string) => Array.from(this.RegInvitations.filter((el) => el.InviterID === userID), (el) => el.InviteeID) 
+    },
+    getInviterByID () {
+      return (userID: string) => Array.from(this.RegInvitations.filter((el) => el.InviteeID === userID), (el) => el.InviterID).push(userID)
+    },
+    getInvitationByID () {
+      return (ID: string) => this.RegInvitations.find((el) => el.ID === ID)
+    }
+  },
   actions: {
     getRegInvitations (req: GetRegInvitationsRequest, done: (error: boolean) => void) {
       doActionWithError<GetRegInvitationsRequest, GetRegInvitationsResponse>(
