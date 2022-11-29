@@ -18,7 +18,11 @@ export const useRegInvitationStore = defineStore('reginvitation', {
       return (userID: string) => Array.from(this.RegInvitations.filter((el) => el.InviterID === userID), (el) => el.InviteeID) 
     },
     getInviterByID () {
-      return (userID: string) => Array.from(this.RegInvitations.filter((el) => el.InviteeID === userID), (el) => el.InviterID).push(userID)
+      return (userID: string) => {
+        const rows = Array.from(this.RegInvitations.filter((el) => el.InviteeID === userID), (el) => el.InviterID)
+        rows.splice(0, 0, userID)
+        return rows
+      }
     },
     getInvitationByID () {
       return (ID: string) => this.RegInvitations.find((el) => el.ID === ID)
